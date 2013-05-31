@@ -11,7 +11,7 @@ class Categoria(models.Model):
 class Producto(models.Model):
 	usuario = models.ForeignKey(User)#llave foranea
 	nombre = models.CharField(max_length=100, unique=True)
-	categoria = models.ForeignKey(Categoria)
+	categoria = models.ForeignKey(Categoria)#llave foranea 
 	descripcion = models.TextField()
 	disponible = models.BooleanField(default = True)
 

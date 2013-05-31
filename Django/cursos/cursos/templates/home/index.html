@@ -1,1 +1,21 @@
 {% extends "base.html" %}
+
+{% block title %}
+	Mostrar Producto
+{% endblock title%}
+
+{% block descripcion %}
+	Descripcion del Sitio
+{% endblock descripcion %}
+
+{% block content %}
+	{% for p in producto %}
+		{{ p.nombre }} - {{ p.categoria.nombre}}
+		<br>
+		{{ p.descripcion }} <br><br>
+		{% empty %}
+			No hay Productos
+	{% endfor %} 
+{% endblock content%}
+
+
