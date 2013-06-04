@@ -1,9 +1,9 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,get_object_or_404
 from django.template import RequestContext
 from cursos.apps.productos.forms import AgregarForm, ActulizarForm
 from cursos.apps.productos.models import Producto
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators #esto es para evitar problemas con el de agregar
+from django.contrib.auth.decorators import login_required #esto es para evitar problemas con el de agregar
 
 def index(request):
 	#si queremos mostrar solo disponibles
@@ -12,6 +12,7 @@ def index(request):
 	ctx = {'producto':producto}
 	return render_to_response('home/index.html', ctx ,context_instance = RequestContext(request))
 
+@login_required
 def agregar(request):
 	form = AgregarForm
     #con todo este codigo manmos los datos a la base de datos para registrar
@@ -33,7 +34,9 @@ def agregar(request):
 	ctx = {'form': form}
 	return render_to_response('home/agregar.html', ctx, context_instance=RequestContext(request))
 
+@login_required
 def actualizar(request, idp):
+	get_object_or_404(Producto, id=idp)
 	p = Producto.objects.get(id=idp)#con esto mandamos a traer uno solo es como Limit en query
 	form = ActulizarForm(instance=p)#llenamos el formulario con los datos que estamos pasando 
 	if request.method == "POST":

@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('cursos.apps.home.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root':settings.MEDIA_ROOT}),#linquiamos archivos media
+    url(r'^accounts/login/','cursos.apps.home.views.index'),
 )
